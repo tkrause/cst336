@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Loop - Inside a Game Engine</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <h1>Inside a Game Engine</h1>
+</header>
+<nav>
+    <a href="index.html"><span>Home</span></a>
+    <a href="loop.html">Game Loop</a>
+    <a href="rendering.html">Rendering</a>
+    <a href="audio.html">Audio</a>
+</nav>
+<main>
+    <h3>The Game Loop</h3>
+    <p>
+        In order to process the large number of objects in a game, a loop is used.
+        This loop is referred to as <strong>the game loop</strong>.
+    </p>
+    <p>
+        For every object, the game must do a number of operations.
+        These include <span class="text-focus">collision detection</span>,
+        <span class="text-focus">moving/physics</span> (often referred to as a tick), and much more.
+    </p>
+    <p>
+        In addition, some engines provide the ability to limit the number of frames to save on computation resources.
+        The reason for this is that the human eye cannot see above 60 frames a second. Thus rendering can be locked
+        on some engines if desired.
+    </p>
+    <p>
+        <img class="full-width" src="img/game-loop.png" alt="Game Loop Life Cycle">
+    </p>
+    <p>
+        As can been seen above, the loop continues until the game exits. The loop calculate the time since the
+        last iteration known as a <strong>tick</strong>. In every tick, the engine receives the input from the player.
+        The engine then updates all the game objects in the world and it's data model. This is also where physics
+        processing could be done.
+    </p>
+    <p>
+        Lastly, all of the objects are rendered out to the screen.
+    </p>
+    <p>
+        A very simple example of a game loop is available below for reference.
+    </p>
+    <pre>
+        <code>
+        double previous = getCurrentTime();
+        double lag = 0.0;
+
+        while (true) {
+            double current = getCurrentTime();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
+
+            processInput();
+
+            while (lag >= MS_PER_UPDATE) {
+                update();
+                lag -= MS_PER_UPDATE;
+            }
+
+            render();
+        }
+        </code>
+    </pre>
+</main>
+<footer>
+    CST 336. 2018 &copy; Krause <br />
+    <strong>Disclamer:</strong> The information in this webpage is fictitous. <br />
+    It is used for academic purposes only.
+</footer>
+</body>
+</html>
