@@ -13,12 +13,51 @@
     <nav>
         <a href="index.html"><span>Home</span></a>
         <a href="loop.html">Game Loop</a>
+        <a href="collision.html">Collision Detection</a>
         <a href="rendering.html">Rendering</a>
-        <a href="audio.html">Audio</a>
     </nav>
     <main>
-        <h3>Rendering and how it works</h3>
-
+        <h3>Rendering and How it Works</h3>
+        <p>
+            The method of rendering depends of the type of graphics used. These could be sprites or 3D
+            meshes made up of vertices which are points in space connected by edges. Since most modern engines are
+            primarily based around meshes, this is the point of view that will be enclosed here.
+        </p>
+        <p>
+            On every render tick, the engine must loop through each of the objects and create an image of the scene.
+            This image is then what is displayed to the player.
+        </p>
+        <p>
+            <img src="img/rendering.png" alt="Example of Rendering">
+        </p>
+        <p>
+            When an object is rendered, the engine converts the vertices into primitive shapes that make up the original shape.
+            Typically, the primitives used are similar to squares with four sides known as <strong>quads</strong>. Although
+            some engines use triangles. Therefore, a common name for this process is <strong>triangulation</strong>.
+        </p>
+        <p>
+            Next the mesh is <strong>rasterized</strong> in which the mesh is split into groups of polygons and flattened into an image.
+            At this point, the representation for this object is a series of image fragments.
+        </p>
+        <p>
+            The next step the engine takes is <strong>texturing</strong>. This is where the engine applies an image texture to
+            color the mesh and add shadows as well as a normal map that gives the depth to the image. This makes it appear to
+            have color and be 3D. Groups of the texture are applied to the groups in the image fragments.
+        </p>
+        <p>
+            Lastly, the image is stitched together with the rest of the visible game objects and rendered out to the screen.
+        </p>
+        <p>
+            Since an engine can have potentially millions of game objects, we must take care to ensure we only render visible objects.
+            Wasting compute resources on objects that are not visible to the player would make the game run significantly slower.
+            Most modern engines, use this technique.
+        </p>
+        <p>
+            <small>
+                Reference:
+                <a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Basic_theory">https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Basic_theory</a>
+            </small>
+        </p>
     </main>
     <footer>
         CST 336. 2018 &copy; Krause <br />

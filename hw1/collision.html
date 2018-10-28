@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collision - Inside a Game Engine</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <h1>Inside a Game Engine</h1>
+</header>
+<nav>
+    <a href="index.html"><span>Home</span></a>
+    <a href="loop.html">Game Loop</a>
+    <a href="collision.html">Collision Detection</a>
+    <a href="rendering.html">Rendering</a>
+</nav>
+<main>
+    <h3>Collision Detection</h3>
+    <p>
+        In games, collection detection is used to perform an action when two objects collide with something in the game world.
+        Without collision detection, objects would fall through the ground and would make for an odd experience.
+    </p>
+    <p>
+        In modern game engines, there are a few approaches to detecting collisions. Typically, these are all available
+        for use in modern engines.
+    </p>
+    <p>
+        <strong>1. Ray-casting</strong>
+        is a term used more in the 3D realm. It works by casting a "ray" in a direction and detecting if
+        it is blocked by anything. This method is fairly quick for detecting collisions. However, it cannot easily detect overlap of objects.
+        In addition, it cannot detect collisions in an arc for example detecting a hit from a sword swing would not be a good use case.
+    </p>
+    <p>
+        <img src="img/raycast.jpg" alt="Example of Ray-casting">
+    </p>
+    <p>
+        <strong>2. Collision Box</strong>
+        detection is typically used for movement and larger objects. It works by drawing a series of boxes around a game object.
+        These invisible boxes are then overlapped with nearby game objects to see if they occupy the same space.
+    </p>
+    <p>
+        <img src="img/collisions.png" alt="Example of Collision Box Detection">
+    </p>
+    <p>
+        <small>
+            Reference:
+            <a href="https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects">https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects</a>
+        </small>
+    </p>
+</main>
+<footer>
+    CST 336. 2018 &copy; Krause <br />
+    <strong>Disclamer:</strong> The information in this webpage is fictitous. <br />
+    It is used for academic purposes only.
+</footer>
+</body>
+</html>
