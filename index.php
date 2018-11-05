@@ -8,6 +8,7 @@
 
     <h2>Homework</h2>
     <a href="hw1/index.html">Homework 1</a><br>
+    <a href="hw2/">Homework 1</a><br>
 
     </body>
 </html>
