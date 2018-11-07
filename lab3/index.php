@@ -12,6 +12,8 @@
         include 'api/pixabayAPI.php';
 
         $imageURLs = getImageURLs($keyword, $layout);
+        // Get the first image for the background
+        $backgroundImage = reset($imageURLs);
     }
 ?>
 <!DOCTYPE html>
