@@ -7,10 +7,12 @@
     <a href="lab2/index.php">Lab 2 - Slots</a><br>
     <a href="lab3/index.php">Lab 3 - Image Carousel</a><br>
     <a href="scart/index.php">Lab 4 - Shopping Cart</a><br>
+    <a href="lab5/">Lab 5 - Product Search</a><br>
 
     <h2>Homework</h2>
     <a href="hw1/index.html">Homework 1</a><br>
-    <a href="hw2/">Homework 1</a><br>
+    <a href="hw2/">Homework 2</a><br>
+    <a href="hw3/">Homework 3</a><br>
 
     </body>
 </html>
