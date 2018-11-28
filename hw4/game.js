@@ -28,23 +28,27 @@ function init(){
     gameScreen.style.height = GS_HEIGHT + 'px';
 
     // Backgrounds
-    bg1 = document.createElement('IMG');
-    bg1.className = 'gameObject';
-    bg1.src = img('bg.jpg');
-    bg1.style.width = '800px';
-    bg1.style.height = '1422px';
-    bg1.style.left = '0px';
-    bg1.style.top = '0px';
-    gameScreen.appendChild(bg1);
+    bg1 = $('<img/>',{
+        class: 'gameObject',
+        src: img('bg.jpg'),
+        css: {
+            width: '800px',
+            height: '1422px',
+            left: 0,
+            top: 0,
+        }
+    }).appendTo(gameScreen);
 
-    bg2 = document.createElement('IMG');
-    bg2.className = 'gameObject';
-    bg2.src = img('bg.jpg');
-    bg2.style.width = '800px';
-    bg2.style.height = '1422px';
-    bg2.style.left = '0px';
-    bg2.style.top = '-' + bg2.style.height;
-    gameScreen.appendChild(bg2);
+    bg2 = $('<img/>',{
+        class: 'gameObject',
+        src: img('bg.jpg'),
+        css: {
+            width: '800px',
+            height: '1422px',
+            left: 0,
+            top: '-1422px',
+        }
+    }).appendTo(gameScreen);
 
     // Bullets
     bullets = document.createElement('DIV');
@@ -66,16 +70,18 @@ function init(){
     ship.style.left = '366px';
     gameScreen.appendChild(ship);
 
-    respawnMessage = document.createElement('DIV');
-    respawnMessage.innerText = 'Press Enter to Respawn';
-    respawnMessage.className = 'gameObject';
-    respawnMessage.style.width = gameScreen.style.width;
-    respawnMessage.style.top = '500px';
-    respawnMessage.style.textAlign = 'center';
-    respawnMessage.style.color = 'yellow';
-    respawnMessage.style.fontSize = '48px';
-    respawnMessage.style.display = 'none';
-    gameScreen.appendChild(respawnMessage);
+    respawnMessage = $('<div/>', {
+        text: 'Press Enter to Respawn',
+        class: 'gameObject',
+        css: {
+            width: gameScreen.style.width,
+            top: '500px',
+            textAlign: 'center',
+            color: 'yellow',
+            fontSize: '48px',
+            display: 'none',
+        }
+    }).appendTo(gameScreen);
 
     for (let i = 0; i < 10; i++) {
         var enemy = new Image();
@@ -107,18 +113,18 @@ function img($name) {
 }
 
 function gameloop() {
-    var bgY = parseInt(bg1.style.top) + BG_SPEED;
+    var bgY = parseInt(bg1.css('top')) + BG_SPEED;
     if (bgY > GS_HEIGHT) {
-        bg1.style.top = -1 * parseInt(bg1.style.height) + 'px';
+        bg1.css('top', -1 * parseInt(bg1.css('height')) + 'px');
     } else {
-        bg1.style.top = bgY + 'px';
+        bg1.css('top', bgY + 'px');
     }
 
-    bgY = parseInt(bg2.style.top) + BG_SPEED;
+    bgY = parseInt(bg2.css('top')) + BG_SPEED;
     if (bgY > GS_HEIGHT) {
-        bg2.style.top = -1 * parseInt(bg2.style.height) + 'px';
+        bg2.css('top', -1 * parseInt(bg2.css('height')) + 'px');
     } else {
-        bg2.style.top = bgY + 'px';
+        bg2.css('top', bgY + 'px');
     }
 
     if (leftArrowDown) {
@@ -166,7 +172,7 @@ function gameloop() {
 
             ship.style.top = '-10000px';
             setTimeout(function() {
-                respawnMessage.style.display = 'block';
+                respawnMessage.show();
                 canRespawn = true;
             }, 3000);
             placeEnemyShip(enemy);
@@ -180,20 +186,21 @@ function respawn() {
 
     ship.style.top = '500px';
     ship.style.left = '366px';
-    respawnMessage.style.display = 'none';
+    respawnMessage.hide();
     canRespawn = false;
 }
 
 function explode(obj) {
-    var explosion = document.createElement('IMG');
-    explosion.src = img('explosion.gif?x=' + Date.now());
-    explosion.className = 'gameObject';
-    explosion.style.width = obj.style.width;
-    explosion.style.height = obj.style.height;
-    explosion.style.left = obj.style.left;
-    explosion.style.top = obj.style.top;
-
-    gameScreen.appendChild(explosion);
+    $('<img/>', {
+        src: img('explosion.gif?x=' + Date.now()),
+        class: 'gameObject',
+        css: {
+            width: obj.style.width,
+            height: obj.style.height,
+            left: obj.style.left,
+            top: obj.style.top,
+        }
+    }).appendTo(gameScreen);
 }
 
 function hittest(a, b) {
@@ -225,30 +232,50 @@ function hittest(a, b) {
 function fire() {
     var bulletWidth = 4;
     var bulletHeight = 10;
-    var bullet = document.createElement('DIV');
-    bullet.className = 'gameObject';
-    bullet.style.backgroundColor = 'yellow';
-    bullet.style.width = bulletWidth;
-    bullet.style.height = bulletHeight;
-    bullet.speed = 20;
-    bullet.style.top = parseInt(ship.style.top) - bulletHeight + 'px';
     var shipX = parseInt(ship.style.left) + parseInt(ship.style.width) / 2;
-    bullet.style.left = (shipX - bulletWidth / 2) + 'px';
+
+    var bullet = $('<div/>',{
+        class: 'gameObject',
+        css: {
+            backgroundColor: 'yellow',
+            width: bulletWidth + 'px',
+            height: bulletHeight + 'px',
+            left: (shipX - bulletWidth / 2) + 'px',
+            top: parseInt(ship.style.top) - bulletHeight + 'px',
+        },
+    });
+
+    bullet = bullet.get(0);
+    bullet.speed = 20;
     bullets.appendChild(bullet);
 }
 
-document.addEventListener('keypress', function(e) {
-    if (e.charCode === 32) fire();
+$(document).on('keypress', function(e) {
+    if (e.charCode === 32) {
+        fire();
+    }
 });
 
-document.addEventListener('keydown', function(e) {
-    if (e.keyCode==37) leftArrowDown = true;
-    if (e.keyCode==39) rightArrowDown = true;
+$(document).on('keydown', function(e) {
+    if (e.keyCode==37) {
+        leftArrowDown = true;
+    }
+
+    if (e.keyCode==39) {
+        rightArrowDown = true;
+    }
 });
 
-document.addEventListener('keyup', function(e) {
-    if (e.keyCode==37) leftArrowDown = false;
-    if (e.keyCode==39) rightArrowDown = false;
+$(document).on('keyup', function(e) {
+    if (e.keyCode==37) {
+        leftArrowDown = false;
+    }
 
-    if (e.keyCode === 13) respawn();
+    if (e.keyCode==39) {
+        rightArrowDown = false;
+    }
+
+    if (e.keyCode === 13) {
+        respawn();
+    }
 });
