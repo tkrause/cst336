@@ -57,7 +57,7 @@ function startGame() {
 
 function resetButtons(){
     $('#letters').show();
-    for (var letter in alphabet) {
+    for (var letter of alphabet) {
         $('#'+letter).attr('class', 'letter btn btn-success');
         $('#'+letter).prop('disabled', false);
     }
@@ -75,7 +75,7 @@ function resetGame() {
 }
 
 function initBoard() {
-    for (var letter in selectedWord) {
+    for (var letter of selectedWord) {
         board.push("_");
     }
 } 
@@ -90,7 +90,7 @@ function updateBoard() {
     $word = $('#word');
     $word.empty();
     
-    for (var letter in board) {
+    for (var letter of board) {
         document.getElementById('word').innerHTML += letter + ' ';
     }
     
@@ -101,7 +101,7 @@ function updateBoard() {
 }
 
 function createLetters() {
-    for (var letter in alphabet) {
+    for (var letter of alphabet) {
         $('#letters').append('<button class="letter btn btn-success" id="' + letter + '">' + letter + '</button>');
     }
 }
