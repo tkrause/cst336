@@ -19,20 +19,19 @@ var words = [
 var previousWords = [];
             
 // LISTENERS
-window.onload = startGame;
+window.onload = startGame();
 
-$('#hintBtn').on('click', function() {
-    $('#hintBtn').hide();
+$("#hintBtn").click(function() {
+    $("#hintBtn").hide();
     showHint = true;
-    remainingGuesses-=1;
+    remainingGuesses -= 1;
     updateMan();
     updateBoard();
 });
 
-$('.letter').on('click', function() {
-    var $this = $(this);
-    checkLetter($this.attr('id'));
-    disableButton($this);
+$(".letter").click(function() {
+    checkLetter($(this).attr("id"));
+    disableButton($(this));
 });
 
 $('.replayBtn').on('click', function() {
