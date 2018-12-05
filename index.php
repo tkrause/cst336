@@ -10,6 +10,7 @@
     <a href="lab5/">Lab 5 - Product Search</a><br>
     <a href="lab6/">Lab 6 - Admin Panel</a><br>
     <a href="lab7/">Lab 7 - Hangman Game</a><br>
+    <a href="lab8/">Lab 8 - Pets Website</a><br>
 
     <h2>Homework</h2>
     <a href="hw1/index.html">Homework 1</a><br>
